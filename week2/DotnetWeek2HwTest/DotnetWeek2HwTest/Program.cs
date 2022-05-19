@@ -21,11 +21,13 @@ namespace DotnetWeek2HwTest
               PrintMessage(day);*/
 
             var signaler = new Signaler();
-            signaler.Inform();
+            //signaler.Inform();
             signaler.AddTime(new JupiterTime(1, 20));
             signaler.AddTime(new JupiterTime(2, 20));
             signaler.AddTime(new JupiterTime(3, 2));
-            signaler.Inform();
+            //signaler.Inform();
+
+            signaler.Check(new JupiterTime(1, 19));
         }
 
         static void PrintTime(JupiterTime time)

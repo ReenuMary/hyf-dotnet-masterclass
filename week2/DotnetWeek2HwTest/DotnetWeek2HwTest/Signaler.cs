@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace DotnetWeek2HwTest
 {
-	public class Signaler
-	{
+    public class Signaler
+    {
         public List<JupiterTime> TimeToSendSignals { get; set; }
 
         public Signaler()
@@ -19,7 +19,7 @@ namespace DotnetWeek2HwTest
 
         public void Inform()
         {
-            if(TimeToSendSignals.Count==0)
+            if (TimeToSendSignals.Count == 0)
             {
                 Console.WriteLine("No Timers added yet");
             }
@@ -30,7 +30,44 @@ namespace DotnetWeek2HwTest
                     Console.WriteLine(time.ToString());
                 }
             }
-            
+
+        }
+
+        public void Check(JupiterTime jupiterTime)
+        {
+            List<JupiterTime> missedSignalTimes = new List<JupiterTime>();
+            foreach (var signalTime in TimeToSendSignals)
+            {
+                if(signalTime.Hours <  jupiterTime.Hours)
+                {
+                    missedSignalTimes.Add(signalTime);
+                }
+                else if(signalTime.Hours == jupiterTime.Hours)
+                {
+                    if (signalTime.Minutes <= jupiterTime.Minutes)
+                    {
+                        missedSignalTimes.Add(signalTime);
+                    }
+                }
+            }
+            //Print the missed times
+            PrintMissedTimes(missedSignalTimes);
+
+        }
+
+        private void PrintMissedTimes(List<JupiterTime> missedSignalTimes)
+        {
+            if(missedSignalTimes.Count==0)
+            {
+                Console.WriteLine("No signals needed to be sent yet");
+            }
+            else
+            {
+               foreach(var missedTime in missedSignalTimes)
+                {
+                    Console.WriteLine(missedTime.ToString());
+                }
+            }
         }
     }
 }
