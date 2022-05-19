@@ -70,6 +70,11 @@ namespace DotnetWeek2HwTest
 
             return calculatedTime;
         }
+
+        public override string ToString()
+        {
+            string minutes = Minutes < 10 ? $"0{Minutes}" : $"{Minutes}";
+            return ($"0{Hours} : {minutes} ");
+        }
     }
 }
-

@@ -23,14 +23,17 @@ namespace DotnetWeek2HwTest
 
         static void PrintTime(JupiterTime time)
         {
-            if(time.Minutes<10)
-            {
-                Console.WriteLine($"Jupiter time is {time.Hours}:0{time.Minutes}");
-            }
-            else
-            {
-                Console.WriteLine($"Jupiter time is {time.Hours}:{time.Minutes}");
-            }
+            /* if(time.Minutes<10)
+             {
+                 Console.WriteLine($"Jupiter time is {time.Hours}:0{time.Minutes}");
+             }
+             else
+             {
+                 Console.WriteLine($"Jupiter time is {time.Hours}:{time.Minutes}");
+             }*/
+            Console.WriteLine(time.ToString());
+
+
         }
 
         static void PrintMessage(string message)
