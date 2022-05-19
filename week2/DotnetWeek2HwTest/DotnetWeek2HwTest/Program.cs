@@ -10,15 +10,22 @@ namespace DotnetWeek2HwTest
             //time.Hours = 8;
             //time.Minutes = 4;
             //PrintTime(time);
-            string day = string.Empty;
-            var time = new JupiterTime(2, 20);
-             var timeAfterAddingHours = time.AddHours(-26,out  day);
-             PrintTime(timeAfterAddingHours);
-             PrintMessage(day);
+            /*  string day = string.Empty;
+              var time = new JupiterTime(2, 20);
+               var timeAfterAddingHours = time.AddHours(-26,out  day);
+               PrintTime(timeAfterAddingHours);
+               PrintMessage(day);
 
-         /*   var timeAfterAddingMinutes = time.AddMinutes(-145,out day);
-            PrintTime(timeAfterAddingMinutes);
-            PrintMessage(day);*/
+             var timeAfterAddingMinutes = time.AddMinutes(-145,out day);
+              PrintTime(timeAfterAddingMinutes);
+              PrintMessage(day);*/
+
+            var signaler = new Signaler();
+            signaler.Inform();
+            signaler.AddTime(new JupiterTime(1, 20));
+            signaler.AddTime(new JupiterTime(2, 20));
+            signaler.AddTime(new JupiterTime(3, 2));
+            signaler.Inform();
         }
 
         static void PrintTime(JupiterTime time)
