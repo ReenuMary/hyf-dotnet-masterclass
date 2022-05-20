@@ -12,14 +12,14 @@ namespace DotnetWeek2HwTest
             {
                 Minutes = minutes;
                 Hours = hours;
-                if (minutes > 60)
+                if (Minutes > 60)
                 {
-                    hours += minutes / 60;
-                    minutes = minutes % 60;
+                    Hours += Minutes / 60;
+                    Minutes = Minutes % 60;
                 }
-                if (hours >= 10)
+                if (Hours >= 10)
                 {
-                    hours = hours % 10;
+                    Hours = Hours % 10;
                 } 
             }
            else
