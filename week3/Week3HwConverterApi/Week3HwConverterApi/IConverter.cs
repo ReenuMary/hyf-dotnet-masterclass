@@ -2,6 +2,7 @@
 {
     public interface IConverter
     {
-        double ConvertGallonsToLitre(int valueGallon);
+        double ConvertGallonsToLiter(int valueGallon);
+        IEnumerable<ConversionModel> ConvertValues(ConversionModel conversionModel);
     }
 }

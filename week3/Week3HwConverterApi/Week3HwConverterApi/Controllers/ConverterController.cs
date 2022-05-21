@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Week3HwConverterApi.Controllers
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class ConverterController : Controller
     {
         private IConverter converter;
@@ -23,7 +24,13 @@ namespace Week3HwConverterApi.Controllers
         [HttpGet("{gallons}")]
         public double Get(int gallons)
         {
-            return converter.ConvertGallonsToLitre(gallons);
+            return converter.ConvertGallonsToLiter(gallons);
+        }
+
+       [HttpPost]
+       public ActionResult<IEnumerable<ConversionModel>> Conversion(ConversionModel conversionModel)
+        {
+            return Ok(converter.ConvertValues(conversionModel));
         }
 
     }
