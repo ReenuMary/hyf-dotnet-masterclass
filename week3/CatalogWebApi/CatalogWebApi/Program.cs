@@ -1,4 +1,9 @@
 ﻿using CatalogWebApi.Repositories;
+using CatalogWebApi.Settings;
+using MongoDB.Driver;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Serializers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +14,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IInMemRepositoryItems, InMemRepositoryItems>();
+BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
+
+
+builder.Services.AddSingleton<IMongoClient>(serviceprovider =>
+{
+    var settings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
+    return new MongoClient(settings.ConnectionString);
+});
+
+//builder.Services.AddSingleton<IInMemRepositoryItems, InMemRepositoryItems>();
+builder.Services.AddSingleton<IInMemRepositoryItems, mongoDbItemsRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

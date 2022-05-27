@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="MongoDB.Driver" Version="2.15.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,11 +16,14 @@
     <None Remove="Entities\" />
     <None Remove="Repositories\" />
     <None Remove="Dtos\" />
+    <None Remove="MongoDB.Driver" />
+    <None Remove="Settings\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Entities\" />
     <Folder Include="Repositories\" />
     <Folder Include="Dtos\" />
+    <Folder Include="Settings\" />
   </ItemGroup>
 </Project>
