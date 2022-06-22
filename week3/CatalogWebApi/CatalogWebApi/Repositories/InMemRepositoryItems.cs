@@ -4,7 +4,7 @@ using CatalogWebApi.Entities;
 
 namespace CatalogWebApi.Repositories;
 
-public class InMemRepositoryItems : IInMemRepositoryItems
+public class InMemRepositoryItems : IRepositoryItems
 {
     private readonly List<Item> items = new()
     {
@@ -13,31 +13,35 @@ public class InMemRepositoryItems : IInMemRepositoryItems
         new Item { Id = Guid.NewGuid(), Name = "Bronze shield", Price = 18, CreationDate = DateTimeOffset.Now },
     };
 
-    public IEnumerable<Item> GetItems()
+    public async Task<IEnumerable<Item>> GetItemsAsync()
     {
-        return items;
+        return  await Task.FromResult(items);
     }
 
-    public Item? GetItem(Guid id)
+    public async Task<Item?> GetItemAsync(Guid id)
     {
-        return items.FirstOrDefault(x => x.Id == id);
+        var item = items.FirstOrDefault(x => x.Id == id);
+        return await Task.FromResult(item);
     }
 
-    public void AddItem(Item item)
+    public async Task AddItemAsync(Item item)
     {
         items.Add(item);
+        await Task.CompletedTask;
     }
 
-    public void UpdateItem(Item item)
+    public async Task UpdateItemAsync(Item item)
     {
       var index =  items.FindIndex(x => x.Id == item.Id);
         items[index] = item;
+        await Task.CompletedTask;
     }
 
-    public void DeleteItem(Guid id)
+    public async Task DeleteItemAsync(Guid id)
     {
         var index = items.FindIndex(x => x.Id == id);
         items.RemoveAt(index);
+        await Task.CompletedTask;
     }
 }
 

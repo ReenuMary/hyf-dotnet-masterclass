@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => { options.SuppressAsyncSuffixInActionNames = false; });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,8 +24,8 @@ builder.Services.AddSingleton<IMongoClient>(serviceprovider =>
     return new MongoClient(settings.ConnectionString);
 });
 
-//builder.Services.AddSingleton<IInMemRepositoryItems, InMemRepositoryItems>();
-builder.Services.AddSingleton<IInMemRepositoryItems, mongoDbItemsRepository>();
+//builder.Services.AddSingleton<IRepositoryItems, InMemRepositoryItems>();
+builder.Services.AddSingleton<IRepositoryItems, mongoDbItemsRepository>();
 
 var app = builder.Build();
 

@@ -5,7 +5,7 @@ using MongoDB.Driver;
 
 namespace CatalogWebApi.Repositories
 {
-	public class mongoDbItemsRepository :IInMemRepositoryItems
+	public class mongoDbItemsRepository :IRepositoryItems
 	{
         private const string databaseName = "catalog";
         private const string collectionName = "items";
@@ -19,32 +19,35 @@ namespace CatalogWebApi.Repositories
             itemsCollection = database.GetCollection<Item>(collectionName);
 		}
 
-        public void AddItem(Item item)
+        public async Task AddItemAsync(Item item)
         {
-            itemsCollection.InsertOne(item);
+           await itemsCollection.InsertOneAsync(item);
         }
 
-        public void DeleteItem(Guid id)
+        public async Task DeleteItemAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var filter = filterBuilder.Eq(x => x.Id, id);
+            await itemsCollection.DeleteOneAsync(filter);
         }
 
-        public Item? GetItem(Guid id)
+        public async Task<Item?> GetItemAsync(Guid id)
         {
            var filter = filterBuilder.Eq(x => x.Id, id);
-            return itemsCollection.Find(filter).SingleOrDefault();
+            return await itemsCollection.Find(filter).SingleOrDefaultAsync();
         }
 
-        public IEnumerable<Item> GetItems()
+        public async Task<IEnumerable<Item>> GetItemsAsync()
         {
-            return itemsCollection.Find(new BsonDocument()).ToList();
+            return await itemsCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        public void UpdateItem(Item item)
+        public async Task UpdateItemAsync(Item item)
         {
             var filter = filterBuilder.Eq(x => x.Id, item.Id);
-            itemsCollection.FindOneAndReplace(filter, item);
+            await itemsCollection.FindOneAndReplaceAsync(filter, item);
         }
+
+        
     }
 }
 
