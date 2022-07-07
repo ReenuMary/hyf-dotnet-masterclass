@@ -39,6 +39,7 @@ namespace DotnetWeek2HwTest
                 }
             }
 
+   
             return (evenCount > oddCount ? getOutlier(integers, false) : getOutlier(integers, true));
         }
 
